@@ -38,15 +38,18 @@ def display(image):
 
 def handle_command_line():
     """Display an image for the phrase in sys.argv, if possible"""
-    phrase = ' '.join(sys.argv[1:]) or 'random'
-
-    try:
-        giphy = get_random_giphy(phrase)
-    except ValueError:
-        sys.stderr.write('Unable to find any GIFs for {!r}\n'.format(phrase))
-        sys.exit(1)
-
-    display(fetch_image(giphy))
+    
+    commandInput = ' '.join(sys.argv[1:]) or 'random'
+    if commandInput[0:4] == "http":
+        display(fetch_image(commandInput))
+    else:    
+        try:
+            giphy = get_random_giphy(commandInput)
+        except ValueError:
+            sys.stderr.write('Unable to find any GIFs for {!r}\n'.format(commandInput))
+            sys.exit(1)
+        sys.stderr.write(giphy)
+        display(fetch_image(giphy))
 
 
 if __name__ == '__main__':
