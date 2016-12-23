@@ -48,7 +48,6 @@ def handle_command_line():
         except ValueError:
             sys.stderr.write('Unable to find any GIFs for {!r}\n'.format(commandInput))
             sys.exit(1)
-        sys.stderr.write(giphy)
         display(fetch_image(giphy))
 
 
